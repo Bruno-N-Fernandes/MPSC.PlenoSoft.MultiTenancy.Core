@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="MPSC.PlenoSoft.Core.Caches">
+      <HintPath>..\..\..\MPSC.PlenoSoft.Core\src\Bin\netcoreapp2.2\MPSC.PlenoSoft.Core.Caches.dll</HintPath>
+    </Reference>
+    <Reference Include="MPSC.PlenoSoft.Core.Collections">
+      <HintPath>..\..\..\MPSC.PlenoSoft.Core\src\Bin\netcoreapp2.2\MPSC.PlenoSoft.Core.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="MPSC.PlenoSoft.Core.Utils">
+      <HintPath>..\..\..\MPSC.PlenoSoft.Core\src\Bin\netcoreapp2.2\MPSC.PlenoSoft.Core.Utils.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

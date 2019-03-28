@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28621.142
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MPSC.PlenoSoft.MultiTenancy.Core", "Core\MPSC.PlenoSoft.MultiTenancy.Core.csproj", "{C3718AE6-D957-4768-9F9C-9D8C6B833D98}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MPSC.PlenoSoft.MultiTenancy.Core.Testes", "Tests\MPSC.PlenoSoft.MultiTenancy.Core.Testes.csproj", "{F9567EB0-C908-49C4-8DD7-677ED3654A1D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C3718AE6-D957-4768-9F9C-9D8C6B833D98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3718AE6-D957-4768-9F9C-9D8C6B833D98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3718AE6-D957-4768-9F9C-9D8C6B833D98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3718AE6-D957-4768-9F9C-9D8C6B833D98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9567EB0-C908-49C4-8DD7-677ED3654A1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9567EB0-C908-49C4-8DD7-677ED3654A1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9567EB0-C908-49C4-8DD7-677ED3654A1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9567EB0-C908-49C4-8DD7-677ED3654A1D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EB9B26C9-B7F8-40B1-9366-9B312836CFAD}
+	EndGlobalSection
+EndGlobal
