@@ -9,9 +9,6 @@ namespace MPSC.PlenoSoft.MultiTenancy.Core.Dominio
 {
 	public class Usuario : Entidade
 	{
-		private const String _senhaNula = "F@nf4rrã0";
-		private static readonly String _senhaVaziaCriptografada = String.Empty.Criptografar();
-
 		public Usuario Owner { get; set; }
 		public String Nome { get; set; }
 		public String EMail { get; set; }
@@ -43,43 +40,33 @@ namespace MPSC.PlenoSoft.MultiTenancy.Core.Dominio
 
 		private String SenhaAtual
 		{
-			get { return UltimasSenhas(1).Select(s => s.SenhaCriptografada).FirstOrDefault() ?? _senhaNula.Criptografar(); }
+			get { return UltimasSenhas(1).Select(s => s.SenhaCriptografada).FirstOrDefault() ?? Senha.VaziaCriptografada.Criptografar(); }
 		}
 
-		public Senha DefinirSenhaInicial(String novaSenhaCriptografada, String confirmaNovaSenhaCriptografada)
+		public Senha DefinirSenhaInicial(String senhaNova, String senhaNovaCofirma)
 		{
-			AssegureQue.EhVazio(Senhas, "Este Usuário já possui uma senha. Não é possível definir nova senha inicial");
-			return TrocarSenha(_senhaNula, novaSenhaCriptografada, confirmaNovaSenhaCriptografada);
+			ValidarSe.EhVazio(Senhas, "Este Usuário já possui uma senha. Não é possível definir nova senha inicial").Aplicar(this);
+			return TrocarSenha(Senha.VaziaCriptografada, senhaNova, senhaNovaCofirma);
 		}
 
-		public Senha TrocarSenha(String senhaAntigaCriptografada, String novaSenhaCriptografada, String confirmaNovaSenhaCriptografada)
+		public Senha TrocarSenha(String senhaAntiga, String senhaNova, String senhaNovaConfirma)
 		{
-			AssegureQue.NaoEhNulo(senhaAntigaCriptografada, "A senha atual informada não pode ser nula");
-			AssegureQue.NaoEhVazio(senhaAntigaCriptografada, "A senha atual informada não pode ser vazia");
+			AssegureQue.NaoEhNulo(senhaAntiga, "A senha atual informada não pode ser nula");
+			AssegureQue.NaoEhVazio(senhaAntiga, "A senha atual informada não pode ser vazia");
+			AssegureQue.EhIgual(senhaAntiga.Criptografar(), SenhaAtual, "A senha informada não é a senha atual");
+			AssegureQue.EhDiferente(senhaAntiga, senhaNova, "A nova senha informada não pode ser a mesma senha atual");
+			AssegureQue.EhDiferente(senhaNova.Criptografar(), SenhaAtual, "A nova senha informada não pode ser a mesma senha atual");
 
-			AssegureQue.NaoEhNulo(novaSenhaCriptografada, "A nova senha informada não pode ser nula");
-			AssegureQue.NaoEhVazio(novaSenhaCriptografada, "A nova senha informada não pode ser vazia (1)");
-			AssegureQue.EhDiferente(novaSenhaCriptografada, _senhaVaziaCriptografada, "A nova senha informada não pode ser vazia (2)");
+			var senha = new Senha(senhaNova, senhaNovaConfirma);
+			senha.EhValido();
 
-			AssegureQue.NaoEhNulo(confirmaNovaSenhaCriptografada, "A confirmação da nova senha informada não pode ser nula");
-			AssegureQue.NaoEhVazio(confirmaNovaSenhaCriptografada, "A confirmação da nova senha informada não pode ser vazia (1)");
-			AssegureQue.EhDiferente(confirmaNovaSenhaCriptografada, _senhaVaziaCriptografada, "A confirmação da nova senha informada não pode ser vazia (2)");
-
-			AssegureQue.EhIgual(novaSenhaCriptografada, confirmaNovaSenhaCriptografada, "A confirmação da nova senha não coincide com a nova senha");
-			AssegureQue.EhIgual(senhaAntigaCriptografada.Criptografar(), SenhaAtual, "A senha informada não é a senha atual");
-
-			AssegureQue.EhDiferente(senhaAntigaCriptografada, novaSenhaCriptografada, "A nova senha informada não pode ser a mesma senha atual");
-			AssegureQue.EhDiferente(senhaAntigaCriptografada, SenhaAtual, "A nova senha informada não pode ser a mesma senha atual");
-
-			var senhaCriptografada = novaSenhaCriptografada.Criptografar();
-			var usouSenhasAnteriores = UltimasSenhas(5).Any(s => s.SenhaCriptografada == senhaCriptografada);
+			var usouSenhasAnteriores = UltimasSenhas(5).Any(s => s.SenhaCriptografada == senha.SenhaCriptografada);
 			AssegureQue.EhFalso(usouSenhasAnteriores, "Não é possível trocar a senha por senhas usadas nas últimas 5 trocas de senha");
 
-			var senha = new Senha { SenhaCriptografada = senhaCriptografada };
 			Senhas.Adicionar(senha);
 
-			AssegureQue.EhDiferente(senhaAntigaCriptografada.Criptografar(), SenhaAtual, "A senha antiga continua sendo a senha atual");
-			AssegureQue.EhIgual(senhaCriptografada, SenhaAtual, "A nova senha informada não pode ser trocada");
+			AssegureQue.EhDiferente(SenhaAtual, senhaAntiga.Criptografar(), "A senha antiga continua sendo a senha atual");
+			AssegureQue.EhIgual(SenhaAtual, senha.SenhaCriptografada, "A nova senha informada não pode ser trocada");
 
 			return senha;
 		}
