@@ -13,7 +13,7 @@ namespace MPSC.PlenoSoft.MultiTenancy.Core.Abstracao
 			_objects.Add(obj);
 		}
 
-		public IEnumerable<Object> Get() => _objects.ToArray();
+		public IEnumerable<Object> Get() { return _objects.ToArray(); }
 
 		public IEnumerable<TObject> Get<TObject>()
 		{

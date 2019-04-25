@@ -13,7 +13,7 @@ namespace MPSC.PlenoSoft.MultiTenancy.Core.Abstracao
 		private readonly List<Mensagem> _mensagens = new List<Mensagem>();
 
 		public Boolean Status { get; private set; } = true;
-		public IEnumerable<Mensagem> Mensagens => _mensagens.ToArray();
+		public IEnumerable<Mensagem> Mensagens { get { return _mensagens.ToArray(); } }
 
 		public void Add(Mensagem mensagem)
 		{

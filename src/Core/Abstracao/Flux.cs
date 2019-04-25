@@ -12,8 +12,8 @@ namespace MPSC.PlenoSoft.MultiTenancy.Core.Abstracao
 	{
 		private readonly FluxArg FluxArg;
 
-		public static IFluxDo To(String descricao, out FluxArg fluxArg) => new Flux(descricao, out fluxArg);
-		public static IFluxDo With(FluxArg fluxArg, String descricao) => new Flux(descricao, fluxArg);
+		public static IFluxDo To(String descricao, out FluxArg fluxArg) { return new Flux(descricao, out fluxArg); }
+		public static IFluxDo With(FluxArg fluxArg, String descricao) { return new Flux(descricao, fluxArg); }
 
 		private Flux(String descricao, out FluxArg fluxArg)
 		{

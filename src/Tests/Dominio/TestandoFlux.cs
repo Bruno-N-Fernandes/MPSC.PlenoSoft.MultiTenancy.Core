@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MPSC.PlenoSoft.MultiTenancy.Core.Abstracao;
+using System;
 
 namespace MPSC.PlenoSoft.MultiTenancy.Core.Testes.Dominio
 {
@@ -22,12 +23,13 @@ namespace MPSC.PlenoSoft.MultiTenancy.Core.Testes.Dominio
 		public void Testando2()
 		{
 			Flux.To("Obter Informacoes da pessoa", out var fluxArg)
-				.Do("Obter Pessoa Por CPF",ObterPessoaPorCPF)
+				.Do("Obter Pessoa Por CPF", ObterPessoaPorCPF)
 				.Do("Obter Vendas da PessoaId", ObterVendasDaPessoaId)
+				.Do("With Lambda Expression To Action", fa => { /* Do Any Thing */ })
+				.Do("With Lambda Expression To Func<T>", fa => 1 /* Return Value */)
 				.Do("Verificar se tá tudo ok", VerificarSeTaTudoOk)
 			;
-
-			Assert.IsTrue(fluxArg.Status);
+			Assert.IsFalse(fluxArg.Status);
 		}
 
 		private void ObterPessoaPorCPF(FluxArg fluxArg)
@@ -43,8 +45,9 @@ namespace MPSC.PlenoSoft.MultiTenancy.Core.Testes.Dominio
 			fluxArg.AddValidation("Pessoa não encontrada");
 		}
 
-		private void ObterVendasDaPessoaId(FluxArg fluxArg)
+		private Int64 ObterVendasDaPessoaId(FluxArg fluxArg)
 		{
+			return 4L;
 		}
 
 		private void VerificarSeTaTudoOk(FluxArg fluxArg)

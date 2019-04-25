@@ -11,7 +11,8 @@ namespace MPSC.PlenoSoft.MultiTenancy.Core.Abstracao
 
 		public override string ToString()
 		{
-			return $"DataHora = {DataHora}, Tipo = {Tipo}, Descricao = {Descricao}, DescricaoDetalhada = {DescricaoDetalhada}";
+			return "DataHora = " + DataHora + ", Tipo = " + Tipo + ", Descricao = " + Descricao + ", DescricaoDetalhada = " + DescricaoDetalhada + "}";
+			//return $"DataHora = {DataHora}, Tipo = {Tipo}, Descricao = {Descricao}, DescricaoDetalhada = {DescricaoDetalhada}";
 		}
 	}
 }
