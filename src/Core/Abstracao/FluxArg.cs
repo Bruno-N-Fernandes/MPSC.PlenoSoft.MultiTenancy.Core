@@ -22,7 +22,7 @@ namespace MPSC.PlenoSoft.MultiTenancy.Core.Abstracao
 
 		public void AddTrack(string descricao)
 		{
-			Add(new Mensagem { Descricao = descricao, DescricaoDetalhada = $"{(Status ? "Sim" : "Não")} - {descricao}", Tipo = TipoMensagem.Track });
+			Add(new Mensagem { Descricao = descricao, DescricaoDetalhada = (Status ? "Sim - " : "Não - ") + descricao, Tipo = TipoMensagem.Track });
 		}
 
 		public void AddValidation(string mensagem, string descricaoDetalhada = null)
